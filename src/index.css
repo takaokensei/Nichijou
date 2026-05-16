@@ -33,13 +33,13 @@
   }
 
   .dark {
-    --bg: #0C0A09;
-    --surface: #1C1917;
-    --text: #FAFAF9;
-    --text-secondary: #A8A29E;
-    --accent: #F59E0B;
-    --accent-muted: #D97706;
-    --border: #292524;
+    --bg: #1a1b26;
+    --surface: #24283b;
+    --text: #a9b1d6;
+    --text-secondary: #9aa5ce;
+    --accent: #7aa2f7;
+    --accent-muted: #bb9af7;
+    --border: #292e42;
 
     --c-aula: #7DD3FC;
     --c-aula-bg: #082F49;
@@ -67,7 +67,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     transition: background 0.25s ease, color 0.25s ease;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -80,13 +80,13 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
   }
   .font-mono-time {
     font-family: 'JetBrains Mono', monospace;
   }
   .font-body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 }
 
