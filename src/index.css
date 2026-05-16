@@ -80,7 +80,7 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Fraunces', serif;
   }
   .font-mono-time {
     font-family: 'JetBrains Mono', monospace;

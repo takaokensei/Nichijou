@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['"Inter"', 'sans-serif'],
-        display: ['"Inter"', 'sans-serif'],
+        display: ['"Fraunces"', 'serif'],
         body: ['"Inter"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
