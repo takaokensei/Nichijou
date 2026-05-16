@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #F5F2EC;
+    --surface: #FFFFFF;
+    --text: #1C1917;
+    --text-secondary: #78716C;
+    --accent: #92400E;
+    --accent-muted: #B45309;
+    --border: #E7E5E4;
+
+    --c-aula: #0C4A6E;
+    --c-aula-bg: #F0F9FF;
+    --c-treino: #14532D;
+    --c-treino-bg: #F0FDF4;
+    --c-pele: #831843;
+    --c-pele-bg: #FDF2F8;
+    --c-cabelo: #78350F;
+    --c-cabelo-bg: #FFFBEB;
+    --c-refeicao: #1C1917;
+    --c-refeicao-bg: #F5F5F4;
+    --c-sono: #1E1B4B;
+    --c-sono-bg: #EEF2FF;
+    --c-estudo: #7C2D12;
+    --c-estudo-bg: #FFF7ED;
+    --c-livre: #44403C;
+    --c-livre-bg: #FAFAF9;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --bg: #0C0A09;
+    --surface: #1C1917;
+    --text: #FAFAF9;
+    --text-secondary: #A8A29E;
+    --accent: #F59E0B;
+    --accent-muted: #D97706;
+    --border: #292524;
+
+    --c-aula: #7DD3FC;
+    --c-aula-bg: #082F49;
+    --c-treino: #86EFAC;
+    --c-treino-bg: #052E16;
+    --c-pele: #F9A8D4;
+    --c-pele-bg: #4A044E;
+    --c-cabelo: #FCD34D;
+    --c-cabelo-bg: #451A03;
+    --c-refeicao: #D6D3D1;
+    --c-refeicao-bg: #1C1917;
+    --c-sono: #A5B4FC;
+    --c-sono-bg: #1E1B4B;
+    --c-estudo: #FDBA74;
+    --c-estudo-bg: #431407;
+    --c-livre: #A8A29E;
+    --c-livre-bg: #1C1917;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-[var(--border)];
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.25s ease, color 0.25s ease;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+  .font-mono-time {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .font-body {
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bootTimeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseAgora {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.6); }
+}
+
+@keyframes scanGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+  50% { box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 25%, transparent); }
+}
