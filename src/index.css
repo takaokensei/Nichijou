@@ -33,13 +33,13 @@
   }
 
   .dark {
-    --bg: #1a1b26;
-    --surface: #24283b;
-    --text: #a9b1d6;
-    --text-secondary: #9aa5ce;
-    --accent: #7aa2f7;
-    --accent-muted: #bb9af7;
-    --border: #292e42;
+    --bg: #0d0d0f;
+    --surface: #18181b;
+    --text: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --accent: #ffffff;
+    --accent-muted: #71717a;
+    --border: #27272a;
 
     --c-aula: #7DD3FC;
     --c-aula-bg: #082F49;
