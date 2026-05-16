@@ -231,3 +231,16 @@ export function getCurrentBlock(dayNum: number, nowMins: number): { block: Sched
   }
   return null;
 }
+
+export function getNextBlocks(dayNum: number, currentIdx: number, count: number = 3): ScheduleBlock[] {
+  const entry = scheduleMap[dayNum];
+  if (!entry) return [];
+  const nextBlocks: ScheduleBlock[] = [];
+  for (let i = 1; i <= count; i++) {
+    const nextIdx = currentIdx + i;
+    if (nextIdx < entry.blocks.length) {
+      nextBlocks.push(entry.blocks[nextIdx]);
+    }
+  }
+  return nextBlocks;
+}

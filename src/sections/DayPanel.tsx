@@ -16,28 +16,10 @@ export function DayPanel({ day, currentBlockIdx, isVisible }: DayPanelProps) {
   return (
     <div style={style}>
       <div style={{ marginBottom: '1.5rem' }}>
-        <h2
-          style={{
-            fontFamily: '"Playfair Display", serif',
-            fontSize: '2rem',
-            fontWeight: 500,
-            color: 'var(--text)',
-            letterSpacing: '-0.02em',
-            margin: 0,
-            lineHeight: 1.2,
-          }}
-        >
+        <h2 className="font-display text-4xl font-semibold text-foreground tracking-tight leading-none m-0">
           {day.name}
         </h2>
-        <p
-          style={{
-            fontSize: '13px',
-            color: 'var(--text-secondary)',
-            marginTop: '4px',
-            letterSpacing: '0.04em',
-            fontFamily: '"DM Sans", sans-serif',
-          }}
-        >
+        <p className="font-sans text-[13px] text-muted-foreground mt-1.5 tracking-wide">
           {day.sub}
         </p>
       </div>

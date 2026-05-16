@@ -12,6 +12,8 @@ import { ProtocolPanel } from '@/sections/ProtocolPanel';
 import { FinancePanel } from '@/sections/FinancePanel';
 import { ShoppingPanel } from '@/sections/ShoppingPanel';
 
+import { ContextWidget } from '@/sections/ContextWidget';
+
 function App() {
   const { theme, toggleTheme } = useTheme();
   const currentBlock = useCurrentBlock();
@@ -60,6 +62,8 @@ function App() {
         <FinancePanel isVisible={activeTab === 'fin'} />
         <ShoppingPanel isVisible={activeTab === 'comp'} />
       </main>
+
+      {bootDone && <ContextWidget />}
     </>
   );
 }

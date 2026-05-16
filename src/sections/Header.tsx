@@ -1,4 +1,5 @@
 import { Sun, Moon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface HeaderProps {
   theme: 'light' | 'dark';
@@ -20,50 +21,26 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
       }}
     >
       <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.5rem', fontWeight: 400, color: 'var(--text)', margin: 0 }}>
-          Rotina <span style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>semanal</span>
+        <h1 className="font-display text-2xl font-normal text-foreground m-0">
+          Rotina <span className="text-muted-foreground italic">semanal</span>
         </h1>
         <div style={{ display: 'flex', gap: '2px', background: 'var(--bg)', borderRadius: '9999px', padding: '3px', border: '1px solid var(--border)' }}>
           <button
             onClick={() => theme !== 'light' && onToggleTheme()}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              padding: '5px 13px',
-              borderRadius: '9999px',
-              fontSize: '10px',
-              fontFamily: '"JetBrains Mono", monospace',
-              letterSpacing: '0.07em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              border: 'none',
-              background: theme === 'light' ? 'var(--text)' : 'transparent',
-              color: theme === 'light' ? 'var(--bg)' : 'var(--text-secondary)',
-              transition: 'all 0.2s ease',
-            }}
+              className={cn(
+                "flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-mono tracking-wider uppercase transition-all duration-300",
+                theme === 'light' ? "bg-foreground text-background shadow-md" : "bg-transparent text-muted-foreground hover:text-foreground"
+              )}
           >
             <Sun size={12} />
             Light
           </button>
           <button
             onClick={() => theme !== 'dark' && onToggleTheme()}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              padding: '5px 13px',
-              borderRadius: '9999px',
-              fontSize: '10px',
-              fontFamily: '"JetBrains Mono", monospace',
-              letterSpacing: '0.07em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              border: 'none',
-              background: theme === 'dark' ? 'var(--text)' : 'transparent',
-              color: theme === 'dark' ? 'var(--bg)' : 'var(--text-secondary)',
-              transition: 'all 0.2s ease',
-            }}
+              className={cn(
+                "flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-mono tracking-wider uppercase transition-all duration-300",
+                theme === 'dark' ? "bg-foreground text-background shadow-md" : "bg-transparent text-muted-foreground hover:text-foreground"
+              )}
           >
             <Moon size={12} />
             Dark

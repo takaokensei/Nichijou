@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import type { ScheduleBlock } from '@/data/schedule';
+import { cn } from '@/lib/utils';
 
 interface TimelineBlockProps {
   block: ScheduleBlock;
@@ -35,20 +36,10 @@ export function TimelineBlock({ block, isActive, index: _idx }: TimelineBlockPro
       }}
     >
       <div
-        style={{
-          width: '72px',
-          minWidth: '72px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          fontSize: '11px',
-          color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
-          paddingRight: '4px',
-          flexShrink: 0,
-          letterSpacing: '0.02em',
-          fontFamily: '"JetBrains Mono", monospace',
-          transition: 'color 0.2s ease',
-        }}
+        className={cn(
+          "w-[72px] min-w-[72px] flex items-center justify-end text-[11px] font-mono tracking-tight transition-colors duration-200 pr-1 shrink-0",
+          isActive ? "text-accent font-bold" : "text-muted-foreground"
+        )}
       >
         {block.time}
       </div>
@@ -91,30 +82,10 @@ export function TimelineBlock({ block, isActive, index: _idx }: TimelineBlockPro
             {block.label}
           </span>
           {isActive && (
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontSize: '9px',
-                fontFamily: '"JetBrains Mono", monospace',
-                letterSpacing: '0.1em',
-                color: 'var(--accent)',
-                textTransform: 'uppercase',
-              }}
-            >
-              <span
-                style={{
-                  width: '5px',
-                  height: '5px',
-                  borderRadius: '50%',
-                  background: 'var(--accent)',
-                  animation: 'pulseAgora 2s infinite',
-                  display: 'inline-block',
-                }}
-              />
-              agora
-            </span>
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-mono tracking-[0.15em] text-accent uppercase font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                agora
+              </span>
           )}
         </div>
         <div
