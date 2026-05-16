@@ -59,9 +59,9 @@ export function WeekendPanel({ isVisible }: WeekendPanelProps) {
                 <TimelineBlock
                   key={`${dayIdx}-${idx}`}
                   block={block}
-                  index={idx}
+                  index={dayIdx === 0 ? idx : idx + 100}
                   isActive={false}
-                  checkinStatus={getStatus(idx)}
+                  checkinStatus={getStatus(dayIdx === 0 ? idx : idx + 100)}
                   onCheckin={toggle}
                 />
               ))}

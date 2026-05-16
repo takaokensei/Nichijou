@@ -26,6 +26,8 @@ export function setCheckin(blockIndex: number, status: CheckinStatus, date: Date
   } else {
     localStorage.setItem(key, status);
   }
+  // Dispatch custom event for same-tab reactivity (e.g. useDailyScore)
+  window.dispatchEvent(new Event('nexus:checkin-update'));
 }
 
 export function getAllCheckins(date: Date = new Date()): Record<number, CheckinStatus> {

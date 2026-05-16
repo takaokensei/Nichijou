@@ -70,12 +70,12 @@ export function useDailyScore(date: Date = new Date()): DailyScoreResult {
 
     // Listen for storage events from other tabs
     window.addEventListener('storage', refresh);
-    // Also poll every 10s to catch same-tab updates
-    const interval = setInterval(refresh, 10_000);
+    // Listen for custom event from same tab
+    window.addEventListener('nexus:checkin-update', refresh);
 
     return () => {
       window.removeEventListener('storage', refresh);
-      clearInterval(interval);
+      window.removeEventListener('nexus:checkin-update', refresh);
     };
   }, [dayNum, date]);
 
