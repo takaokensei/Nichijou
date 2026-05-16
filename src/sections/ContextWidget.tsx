@@ -79,9 +79,11 @@ export function ContextWidget() {
                 <div key={i} className="flex items-center justify-between p-2 rounded-xl hover:bg-muted/50 transition-colors group">
                   <div className="flex items-center gap-2">
                     <div className={cn(
-                      "w-1.5 h-1.5 rounded-full",
-                      `bg-[var(--c-${block.category})]`
-                    )} />
+                      "flex items-center justify-center p-1 rounded-md",
+                      `bg-[var(--c-${block.category})] text-white`
+                    )}>
+                      {NextIcon ? <NextIcon size={10} /> : <div className="w-1.5 h-1.5 rounded-full bg-current" />}
+                    </div>
                     <span className="text-[11px] font-medium text-foreground group-hover:translate-x-0.5 transition-transform">
                       {block.label}
                     </span>

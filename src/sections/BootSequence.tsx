@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { shouldShowBoot, setLastBootDate } from '@/lib/storage';
 
 interface BootSequenceProps {
   onComplete: () => void;
@@ -21,10 +22,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
     const mm = String(now.getMinutes()).padStart(2, '0');
     setTimeStr(`${hh}:${mm}`);
 
-    const STORAGE_KEY = 'rotina_boot_day';
-    const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-
-    if (localStorage.getItem(STORAGE_KEY) === todayKey) {
+    if (!shouldShowBoot()) {
       setFadeOut(true);
       setTimeout(onComplete, 100);
       return;
@@ -71,10 +69,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
   };
 
   const finishScan = () => {
-    const STORAGE_KEY = 'rotina_boot_day';
-    const now = new Date();
-    const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    localStorage.setItem(STORAGE_KEY, todayKey);
+    setLastBootDate();
 
     setTimeout(() => {
       setFadeOut(true);

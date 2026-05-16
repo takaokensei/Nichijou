@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { getCheckin, setCheckin, getAllCheckins } from '@/lib/storage';
 import type { CheckinStatus } from '@/lib/storage';
 
-export { CheckinStatus };
+export type { CheckinStatus };
 
 export function useCheckin(date: Date = new Date()) {
   const [checkins, setCheckins] = useState<Record<number, CheckinStatus>>(

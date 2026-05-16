@@ -1,11 +1,14 @@
 import { protocols } from '@/data/protocols';
 import { TimelineBlock } from './TimelineBlock';
+import { useCheckin } from '@/hooks/useCheckin';
 
 interface ProtocolPanelProps {
   isVisible: boolean;
 }
 
 export function ProtocolPanel({ isVisible }: ProtocolPanelProps) {
+  const { getStatus, toggle } = useCheckin();
+
   const style: React.CSSProperties = {
     display: isVisible ? 'block' : 'none',
     animation: isVisible ? 'fadeIn 0.2s ease' : 'none',
@@ -63,6 +66,8 @@ export function ProtocolPanel({ isVisible }: ProtocolPanelProps) {
                 block={block}
                 index={idx}
                 isActive={false}
+                checkinStatus={getStatus(idx)}
+                onCheckin={toggle}
               />
             ))}
           </div>
