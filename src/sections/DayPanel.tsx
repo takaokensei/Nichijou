@@ -1,5 +1,6 @@
 import type { DaySchedule } from '@/data/schedule';
 import { TimelineBlock } from './TimelineBlock';
+import { useCheckin } from '@/hooks/useCheckin';
 
 interface DayPanelProps {
   day: DaySchedule;
@@ -8,6 +9,8 @@ interface DayPanelProps {
 }
 
 export function DayPanel({ day, currentBlockIdx, isVisible }: DayPanelProps) {
+  const { getStatus, toggle } = useCheckin();
+
   const style: React.CSSProperties = {
     display: isVisible ? 'block' : 'none',
     animation: isVisible ? 'fadeIn 0.2s ease' : 'none',
@@ -47,6 +50,8 @@ export function DayPanel({ day, currentBlockIdx, isVisible }: DayPanelProps) {
             block={block}
             index={idx}
             isActive={currentBlockIdx === idx}
+            checkinStatus={getStatus(idx)}
+            onCheckin={toggle}
           />
         ))}
       </div>

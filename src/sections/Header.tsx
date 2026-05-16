@@ -1,6 +1,7 @@
 import { Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLiveClock } from '@/hooks/useLiveClock';
+import { ScoreBadge } from './ScoreBadge';
 
 interface HeaderProps {
   theme: 'light' | 'dark';
@@ -38,8 +39,11 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
           </span>
         </div>
 
-        {/* Right: Theme Toggle */}
-        <div style={{ display: 'flex', gap: '2px', background: 'var(--bg)', borderRadius: '9999px', padding: '3px', border: '1px solid var(--border)' }}>
+        {/* Right: Score + Theme Toggle */}
+        <div className="flex items-center gap-4">
+          <ScoreBadge />
+          
+          <div style={{ display: 'flex', gap: '2px', background: 'var(--bg)', borderRadius: '9999px', padding: '3px', border: '1px solid var(--border)' }}>
           <button
             onClick={() => theme !== 'light' && onToggleTheme()}
             className={cn(
@@ -60,6 +64,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
             <Moon size={12} />
             Dark
           </button>
+        </div>
         </div>
       </div>
     </header>
