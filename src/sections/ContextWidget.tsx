@@ -1,7 +1,7 @@
 import { useContextWidget } from '@/hooks/useContextWidget';
 import { Clock, ArrowRight, Zap, Coffee, Book, Dumbbell, Sparkles, Moon, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Category } from '@/data/schedule';
+import type { Category } from '@/data/schedule';
 
 const categoryIcons: Record<Category, any> = {
   aula: Book,

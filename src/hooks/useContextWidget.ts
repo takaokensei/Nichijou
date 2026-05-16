@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { getCurrentBlock, getNextBlocks, toMins, scheduleMap, ScheduleBlock } from '@/data/schedule';
+import { getCurrentBlock, getNextBlocks, toMins, scheduleMap } from '@/data/schedule';
+import type { ScheduleBlock } from '@/data/schedule';
 
 export interface ContextData {
   currentBlock: ScheduleBlock | null;

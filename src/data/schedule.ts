@@ -1,3 +1,4 @@
+// NEXUS Schedule Data Source
 export type Category = 'aula' | 'treino' | 'pele' | 'cabelo' | 'refeicao' | 'sono' | 'estudo' | 'livre';
 
 export interface ScheduleBlock {
