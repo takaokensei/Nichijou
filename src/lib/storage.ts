@@ -1,4 +1,4 @@
-// Typed localStorage wrapper — all keys centralized here, never hardcoded elsewhere.
+import { syncDayCheckins } from './api';
 
 export type CheckinStatus = 'done' | 'skipped' | null;
 
@@ -28,6 +28,13 @@ export function setCheckin(blockIndex: number, status: CheckinStatus, date: Date
   }
   // Dispatch custom event for same-tab reactivity (e.g. useDailyScore)
   window.dispatchEvent(new Event('nexus:checkin-update'));
+
+  // Opportunistic background sync with the new FastAPI backend
+  const dKey = dateKey(date);
+  const dailyData = getCheckinsByDateStr(dKey);
+  syncDayCheckins(dKey, dailyData).catch(() => {
+    // Silently fail if offline. LocalStorage is our source of truth right now.
+  });
 }
 
 export function getCheckinsByDateStr(dateStr: string): Record<number, CheckinStatus> {
