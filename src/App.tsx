@@ -9,6 +9,7 @@ import { Navigation } from '@/sections/Navigation';
 import { DayPanel } from '@/sections/DayPanel';
 import { WeekendPanel } from '@/sections/WeekendPanel';
 import { ProtocolPanel } from '@/sections/ProtocolPanel';
+import { AnalyticsPanel } from '@/sections/AnalyticsPanel';
 import { FinancePanel } from '@/sections/FinancePanel';
 import { ShoppingPanel } from '@/sections/ShoppingPanel';
 
@@ -59,6 +60,7 @@ function App() {
 
         <WeekendPanel isVisible={activeTab === 'fds'} />
         <ProtocolPanel isVisible={activeTab === 'proto'} />
+        <AnalyticsPanel isVisible={activeTab === 'analytics'} />
         <FinancePanel isVisible={activeTab === 'fin'} />
         <ShoppingPanel isVisible={activeTab === 'comp'} />
       </main>

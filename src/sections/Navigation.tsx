@@ -1,3 +1,6 @@
+import { cn } from '@/lib/utils';
+import { Activity } from 'lucide-react';
+
 const tabs = [
   { id: 'seg', label: 'Segunda' },
   { id: 'ter', label: 'Terça' },
@@ -8,6 +11,7 @@ const tabs = [
   { id: 'proto', label: 'Protocolos' },
   { id: 'fin', label: 'Finanças' },
   { id: 'comp', label: 'Compras' },
+  { id: 'analytics', label: 'Analytics', icon: Activity },
 ];
 
 interface NavigationProps {
@@ -17,51 +21,27 @@ interface NavigationProps {
 
 export function Navigation({ activeTab, onTabChange }: NavigationProps) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '2px',
-        flexWrap: 'wrap',
-        marginBottom: '2rem',
-        background: 'var(--surface)',
-        borderRadius: '16px',
-        padding: '4px',
-        border: '1px solid var(--border)',
-      }}
-    >
-      {tabs.map(tab => (
-        <button
-          key={tab.id}
-          onClick={() => onTabChange(tab.id)}
-          style={{
-            padding: '8px 16px',
-            borderRadius: '12px',
-            fontSize: '13px',
-            fontFamily: '"DM Sans", sans-serif',
-            letterSpacing: '0.02em',
-            cursor: 'pointer',
-            border: 'none',
-            background: activeTab === tab.id ? 'var(--accent)' : 'transparent',
-            color: activeTab === tab.id ? '#fff' : 'var(--text-secondary)',
-            fontWeight: activeTab === tab.id ? 500 : 400,
-            transition: 'all 0.15s ease',
-          }}
-          onMouseEnter={e => {
-            if (activeTab !== tab.id) {
-              e.currentTarget.style.background = 'rgba(128,128,128,0.06)';
-              e.currentTarget.style.color = 'var(--text)';
-            }
-          }}
-          onMouseLeave={e => {
-            if (activeTab !== tab.id) {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.color = 'var(--text-secondary)';
-            }
-          }}
-        >
-          {tab.label}
-        </button>
-      ))}
+    <div className="flex flex-wrap gap-1 mb-8 bg-[var(--surface)] rounded-2xl p-1.5 border border-[var(--border)] overflow-x-auto scrollbar-hide">
+      {tabs.map((tab) => {
+        const isActive = activeTab === tab.id;
+        const Icon = tab.icon;
+        
+        return (
+          <button
+            key={tab.id}
+            onClick={() => onTabChange(tab.id)}
+            className={cn(
+              "flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-sans tracking-wide transition-all duration-200 border-none cursor-pointer whitespace-nowrap",
+              isActive 
+                ? "bg-[var(--accent)] text-white shadow-sm font-medium" 
+                : "bg-transparent text-[var(--text-secondary)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]"
+            )}
+          >
+            {Icon && <Icon size={14} className={isActive ? "text-white" : "text-[var(--accent)]"} />}
+            {tab.label}
+          </button>
+        );
+      })}
     </div>
   );
 }
