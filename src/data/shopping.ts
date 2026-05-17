@@ -24,12 +24,14 @@ export const skinProducts: ShoppingItem[] = [
     links: [{ label: 'Amazon', url: 'https://www.amazon.com.br/S%C3%A9rum-Nc-10-Principia-Niacinamida-Zinco/dp/B08R7RSJFX' }],
   },
   {
-    title: 'Hidratante Gel — Nivea Hydra Skin Effect',
-    brand: '50ml · gel-creme leve · não comedogênico',
-    price: 'R$ 35–45',
+    title: 'Nivea Facial Hidratante Gel (Pepino)',
+    brand: '100g · oil-free com ácido hialurônico · ideal pele oleosa',
+    price: 'R$ 29–35',
     priceSub: 'dura ~3 meses',
-    links: [],
-    note: 'Busca em farmácias online ou ML',
+    links: [
+      { label: 'Amazon', url: 'https://www.amazon.com.br/s?k=Nivea+Facial+Hidratante+Gel+pepino' },
+      { label: 'Mercado Livre', url: 'https://lista.mercadolivre.com.br/nivea-facial-hidratante-gel-pepino' }
+    ],
   },
   {
     title: 'Protetor Solar Anasol Oil Free Toque Seco FPS 50',

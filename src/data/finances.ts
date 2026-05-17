@@ -23,7 +23,7 @@ export interface FinPhase {
 export const finInitialProducts: FinProduct[] = [
   { title: 'Sabonete facial suave', brand: 'Principia GL-01 ou Nupill Derme Control · 120–150ml', price: 'R$ 22–30', priceSub: 'dura ~2 meses', badge: 'Compra única agora', badgeType: 'unico' },
   { title: 'Sérum niacinamida 10% + zinco 1%', brand: 'Principia NC-10 · 30ml', price: 'R$ 35–45', priceSub: 'dura ~2–3 meses', badge: 'Compra única agora', badgeType: 'unico' },
-  { title: 'Hidratante gel-creme não comedogênico', brand: 'Nivea Hydra Skin Effect gel · 50ml', price: 'R$ 25–35', priceSub: 'dura ~3 meses', badge: 'Compra única agora', badgeType: 'unico' },
+  { title: 'Hidratante gel oil-free', brand: 'Nivea Facial Hidratante Gel (Pepino) · 100g', price: 'R$ 29–35', priceSub: 'dura ~3 meses', badge: 'Compra única agora', badgeType: 'unico' },
   { title: 'Protetor solar FPS 50+ toque seco', brand: 'Anasol Oil Free Toque Seco 200ml — melhor custo-benefício', price: 'R$ 37–42', priceSub: 'dura ~2–3 meses', badge: 'Compra única agora', badgeType: 'unico' },
   { title: 'Água micelar (limpeza dupla)', brand: 'Garnier Água Micelar 400ml', price: 'R$ 22–28', priceSub: 'dura ~3 meses', badge: 'Compra única agora', badgeType: 'unico' },
   { title: 'Óleo de rosa mosqueta — estrias', brand: 'Aplicar nos flancos e posterior de coxa após banho. Diário.', price: 'R$ 18–28', priceSub: 'dura ~3 meses', badge: 'Compra única agora', badgeType: 'unico' },
