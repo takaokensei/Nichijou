@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getCheckinsByDateStr } from '@/lib/storage';
-import { scheduleMap, Category, weekendSchedule } from '@/data/schedule';
+import { scheduleMap, weekendSchedule } from '@/data/schedule';
+import type { Category } from '@/data/schedule';
 
 export type StreaksData = Record<Category, number>;
 
