@@ -9,10 +9,10 @@ function scoreColor(score: number): string {
 }
 
 function scoreRing(score: number): string {
-  if (score >= 80) return 'border-emerald-400/60';
-  if (score >= 55) return 'border-yellow-400/60';
-  if (score >= 30) return 'border-orange-400/60';
-  return 'border-red-400/40';
+  if (score >= 80) return 'border-emerald-400/50 shadow-emerald-500/10';
+  if (score >= 55) return 'border-yellow-400/50 shadow-yellow-500/10';
+  if (score >= 30) return 'border-orange-400/50 shadow-orange-500/10';
+  return 'border-red-400/30 shadow-red-500/10';
 }
 
 interface ScoreBadgeProps {
@@ -21,17 +21,19 @@ interface ScoreBadgeProps {
 
 export function ScoreBadge({ className }: ScoreBadgeProps) {
   const { score, blocksDone, blocksTotal } = useDailyScore();
+  const circumference = 2 * Math.PI * 8;
 
   return (
     <div
       className={cn(
-        'flex items-center gap-2 px-3 py-1.5 rounded-full border bg-background/40',
+        'flex items-center gap-2 px-3 py-1.5 rounded-full border shadow-lg transition-all duration-500',
+        'bg-[var(--surface)]/60 backdrop-blur-sm',
         scoreRing(score),
         className
       )}
-      title={`${blocksDone}/${blocksTotal} blocos concluídos`}
+      title={`${blocksDone}/${blocksTotal} blocos concluídos hoje`}
     >
-      {/* Mini arc progress */}
+      {/* Circular Progress */}
       <div className="relative w-5 h-5 shrink-0">
         <svg viewBox="0 0 20 20" className="w-full h-full -rotate-90">
           <circle
@@ -39,24 +41,24 @@ export function ScoreBadge({ className }: ScoreBadgeProps) {
             fill="none"
             stroke="currentColor"
             strokeWidth="2.5"
-            className="text-muted/30"
+            className="text-[var(--border)]"
           />
           <circle
             cx="10" cy="10" r="8"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.5"
-            strokeDasharray={`${2 * Math.PI * 8}`}
-            strokeDashoffset={`${2 * Math.PI * 8 * (1 - score / 100)}`}
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference * (1 - score / 100)}
             strokeLinecap="round"
             className={cn('transition-all duration-700', scoreColor(score))}
           />
         </svg>
       </div>
 
-      <span className={cn('font-mono text-[11px] font-bold tracking-wider tabular-nums', scoreColor(score))}>
+      <span className={cn('font-mono text-[11px] font-bold tracking-widest tabular-nums', scoreColor(score))}>
         {score}
-        <span className="text-muted-foreground font-normal">/100</span>
+        <span className="text-[var(--text-secondary)] font-normal text-[9px]">/100</span>
       </span>
     </div>
   );

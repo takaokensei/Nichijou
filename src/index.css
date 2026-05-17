@@ -2,114 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── DESIGN TOKENS ──────────────────────────────────────────── */
 @layer base {
   :root {
-    --bg: #F5F2EC;
+    --bg: #F4F2EE;
     --surface: #FFFFFF;
+    --surface-2: #F9F7F5;
     --text: #1C1917;
     --text-secondary: #78716C;
-    --accent: #92400E;
-    --accent-muted: #B45309;
-    --border: #E7E5E4;
+    --accent: #5B21B6;
+    --accent-muted: #7C3AED;
+    --border: #E5E1DC;
+    --glow: rgba(91, 33, 182, 0.15);
 
-    --c-aula: #0C4A6E;
-    --c-aula-bg: #F0F9FF;
-    --c-treino: #14532D;
-    --c-treino-bg: #F0FDF4;
-    --c-pele: #831843;
-    --c-pele-bg: #FDF2F8;
-    --c-cabelo: #78350F;
-    --c-cabelo-bg: #FFFBEB;
-    --c-refeicao: #1C1917;
-    --c-refeicao-bg: #F5F5F4;
-    --c-sono: #1E1B4B;
-    --c-sono-bg: #EEF2FF;
-    --c-estudo: #7C2D12;
-    --c-estudo-bg: #FFF7ED;
-    --c-livre: #44403C;
-    --c-livre-bg: #FAFAF9;
+    --c-aula: #0C4A6E;     --c-aula-bg: #F0F9FF;
+    --c-treino: #14532D;   --c-treino-bg: #F0FDF4;
+    --c-pele: #831843;     --c-pele-bg: #FDF2F8;
+    --c-cabelo: #78350F;   --c-cabelo-bg: #FFFBEB;
+    --c-refeicao: #374151; --c-refeicao-bg: #F9FAFB;
+    --c-sono: #312E81;     --c-sono-bg: #EEF2FF;
+    --c-estudo: #7C2D12;   --c-estudo-bg: #FFF7ED;
+    --c-livre: #44403C;    --c-livre-bg: #FAFAF9;
 
     --radius: 0.75rem;
+    --header-h: 56px;
   }
 
   .dark {
-    --bg: #0d0d0f;
-    --surface: #18181b;
-    --text: #f4f4f5;
-    --text-secondary: #a1a1aa;
-    --accent: #ffffff;
-    --accent-muted: #71717a;
-    --border: #27272a;
+    --bg: #080809;
+    --surface: #111113;
+    --surface-2: #18181b;
+    --text: #EBEBF0;
+    --text-secondary: #71717A;
+    --accent: #A78BFA;
+    --accent-muted: #7C3AED;
+    --border: #1f1f23;
+    --glow: rgba(167, 139, 250, 0.12);
 
-    --c-aula: #7DD3FC;
-    --c-aula-bg: #082F49;
-    --c-treino: #86EFAC;
-    --c-treino-bg: #052E16;
-    --c-pele: #F9A8D4;
-    --c-pele-bg: #4A044E;
-    --c-cabelo: #FCD34D;
-    --c-cabelo-bg: #451A03;
-    --c-refeicao: #D6D3D1;
-    --c-refeicao-bg: #1C1917;
-    --c-sono: #A5B4FC;
-    --c-sono-bg: #1E1B4B;
-    --c-estudo: #FDBA74;
-    --c-estudo-bg: #431407;
-    --c-livre: #A8A29E;
-    --c-livre-bg: #1C1917;
+    --c-aula: #7DD3FC;     --c-aula-bg: #0a1e2e;
+    --c-treino: #6EE7B7;   --c-treino-bg: #041a0f;
+    --c-pele: #F9A8D4;     --c-pele-bg: #2a0520;
+    --c-cabelo: #FCD34D;   --c-cabelo-bg: #2a1200;
+    --c-refeicao: #D4D4D8; --c-refeicao-bg: #111113;
+    --c-sono: #A5B4FC;     --c-sono-bg: #0f0f25;
+    --c-estudo: #FDBA74;   --c-estudo-bg: #1e0e00;
+    --c-livre: #A8A29E;    --c-livre-bg: #111113;
   }
 }
 
+/* ── BASE STYLES ────────────────────────────────────────────── */
 @layer base {
   * {
-    @apply border-[var(--border)];
+    @apply border-[var(--border)] box-border;
   }
   body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Inter', sans-serif;
-    transition: background 0.25s ease, color 0.25s ease;
-    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+    min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 }
 
+/* ── TYPOGRAPHY UTILITIES ───────────────────────────────────── */
 @layer utilities {
-  .font-display {
-    font-family: 'Fraunces', serif;
+  .font-display    { font-family: 'Fraunces', serif; }
+  .font-mono-time  { font-family: 'JetBrains Mono', monospace; }
+  .font-body       { font-family: 'Inter', sans-serif; }
+
+  /* Glassmorphism surfaces */
+  .glass {
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
   }
-  .font-mono-time {
-    font-family: 'JetBrains Mono', monospace;
+  .glass-strong {
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
   }
-  .font-body {
-    font-family: 'Inter', sans-serif;
-  }
+
+  /* Scrollbar hide */
+  .scrollbar-hide { scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+  /* Glow effect for accent elements */
+  .glow-accent { box-shadow: 0 0 20px var(--glow); }
 }
 
-@keyframes fadeOut {
-  to { opacity: 0; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bootTimeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* ── KEYFRAMES ──────────────────────────────────────────────── */
+@keyframes fadeOut    { to   { opacity: 0; } }
+@keyframes fadeIn     { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp    { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bootTimeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 @keyframes pulseAgora {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.6); }
+  50%       { opacity: 0.4; transform: scale(0.65); }
 }
 
-@keyframes scanGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
-  50% { box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 25%, transparent); }
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes scanLine {
+  0%   { transform: scaleX(0); opacity: 0; }
+  50%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+/* ── COMPONENT STYLES ───────────────────────────────────────── */
+/* Make the "agora" badge pulse with the accent glow */
+.badge-agora {
+  animation: pulseAgora 2s ease-in-out infinite;
 }

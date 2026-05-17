@@ -30,8 +30,8 @@ export function setCheckin(blockIndex: number, status: CheckinStatus, date: Date
   window.dispatchEvent(new Event('nexus:checkin-update'));
 }
 
-export function getAllCheckins(date: Date = new Date()): Record<number, CheckinStatus> {
-  const prefix = `${CHECKIN_PREFIX}:${dateKey(date)}:`;
+export function getCheckinsByDateStr(dateStr: string): Record<number, CheckinStatus> {
+  const prefix = `${CHECKIN_PREFIX}:${dateStr}:`;
   const result: Record<number, CheckinStatus> = {};
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -44,6 +44,10 @@ export function getAllCheckins(date: Date = new Date()): Record<number, CheckinS
     }
   }
   return result;
+}
+
+export function getAllCheckins(date: Date = new Date()): Record<number, CheckinStatus> {
+  return getCheckinsByDateStr(dateKey(date));
 }
 
 // ── BOOT FLAG ────────────────────────────────────────────────

@@ -4,7 +4,7 @@ import { useCurrentBlock } from '@/hooks/useCurrentBlock';
 import { weekDays, scheduleMap } from '@/data/schedule';
 import { BootSequence } from '@/sections/BootSequence';
 import { Header } from '@/sections/Header';
-import { Legend } from '@/sections/Legend';
+import { MetricsPanel } from '@/sections/MetricsPanel';
 import { Navigation } from '@/sections/Navigation';
 import { DayPanel } from '@/sections/DayPanel';
 import { WeekendPanel } from '@/sections/WeekendPanel';
@@ -45,7 +45,7 @@ function App() {
       <Header theme={theme} onToggleTheme={toggleTheme} />
 
       <main style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
-        <Legend />
+        <MetricsPanel />
         <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
         {weekDays.map(day => (

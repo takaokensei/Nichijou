@@ -24,7 +24,7 @@ export interface DailyScoreResult {
   blocksTotal: number;     // raw count
 }
 
-function computeScore(dayNum: number, checkins: Record<number, string | null>): DailyScoreResult {
+export function computeScore(dayNum: number, checkins: Record<number, string | null>): DailyScoreResult {
   const entry = scheduleMap[dayNum];
   if (!entry) return { score: 0, completed: 0, total: 0, blocksDone: 0, blocksSkipped: 0, blocksTotal: 0 };
 

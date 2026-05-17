@@ -1,4 +1,4 @@
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Cpu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLiveClock } from '@/hooks/useLiveClock';
 import { ScoreBadge } from './ScoreBadge';
@@ -12,60 +12,70 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
   const time = useLiveClock();
 
   return (
-    <header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 40,
-        padding: '12px 24px',
-        background: 'color-mix(in srgb, var(--surface) 80%, transparent)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid var(--border)',
-      }}
-    >
-      <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        {/* Left: Title + Live Clock */}
-        <div className="flex items-center gap-4">
-          <h1 className="font-display text-xl font-normal text-foreground m-0 leading-none">
-            Rotina <span className="text-muted-foreground italic">semanal</span>
-          </h1>
-          <div className="h-4 w-px bg-border" />
+    <header className="sticky top-0 z-40 glass-strong border-b border-[var(--border)]">
+      <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
+
+        {/* Left — Brand + System Status */}
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="w-6 h-6 rounded-md bg-[var(--accent)] flex items-center justify-center glow-accent">
+              <Cpu size={13} className="text-white" />
+            </div>
+            <h1 className="font-display text-lg font-medium text-[var(--text)] m-0 leading-none whitespace-nowrap">
+              NEXUS
+            </h1>
+          </div>
+
+          <div className="h-4 w-px bg-[var(--border)] shrink-0" />
+
           <span
-            className="font-mono text-sm font-bold tracking-widest text-foreground tabular-nums"
+            className="font-mono text-sm font-bold tracking-widest text-[var(--text)] tabular-nums shrink-0"
             style={{ fontFeatureSettings: '"tnum"' }}
           >
             {time}
           </span>
+
+          <div className="h-4 w-px bg-[var(--border)] shrink-0 hidden sm:block" />
+
+          <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[var(--accent)] hidden sm:block shrink-0">
+            Sistema Ativo
+          </span>
         </div>
 
-        {/* Right: Score + Theme Toggle */}
-        <div className="flex items-center gap-4">
+        {/* Right — Score + Theme Toggle */}
+        <div className="flex items-center gap-3 shrink-0">
           <ScoreBadge />
-          
-          <div style={{ display: 'flex', gap: '2px', background: 'var(--bg)', borderRadius: '9999px', padding: '3px', border: '1px solid var(--border)' }}>
-          <button
-            onClick={() => theme !== 'light' && onToggleTheme()}
-            className={cn(
-              "flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer border-none",
-              theme === 'light' ? "bg-foreground text-background shadow-md" : "bg-transparent text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <Sun size={12} />
-            Light
-          </button>
-          <button
-            onClick={() => theme !== 'dark' && onToggleTheme()}
-            className={cn(
-              "flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer border-none",
-              theme === 'dark' ? "bg-foreground text-background shadow-md" : "bg-transparent text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <Moon size={12} />
-            Dark
-          </button>
+
+          <div className="flex gap-px p-0.5 rounded-full bg-[var(--surface-2)] border border-[var(--border)]">
+            <button
+              onClick={() => theme !== 'light' && onToggleTheme()}
+              title="Modo Claro"
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer border-none",
+                theme === 'light'
+                  ? "bg-[var(--accent)] text-white shadow-md"
+                  : "bg-transparent text-[var(--text-secondary)] hover:text-[var(--text)]"
+              )}
+            >
+              <Sun size={11} />
+              <span className="hidden sm:inline">Light</span>
+            </button>
+            <button
+              onClick={() => theme !== 'dark' && onToggleTheme()}
+              title="Modo Escuro"
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer border-none",
+                theme === 'dark'
+                  ? "bg-[var(--accent)] text-white shadow-md"
+                  : "bg-transparent text-[var(--text-secondary)] hover:text-[var(--text)]"
+              )}
+            >
+              <Moon size={11} />
+              <span className="hidden sm:inline">Dark</span>
+            </button>
+          </div>
         </div>
-        </div>
+
       </div>
     </header>
   );
