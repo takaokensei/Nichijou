@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { skinProducts, hairProducts } from '@/data/shopping';
+import { cn } from '@/lib/utils';
 
 interface ShoppingPanelProps {
   isVisible: boolean;
@@ -8,70 +9,40 @@ interface ShoppingPanelProps {
 function ShoppingCard({ item }: { item: typeof skinProducts[0] }) {
   return (
     <div
-      style={{
-        background: 'var(--surface)',
-        border: item.pending ? '1px solid var(--c-cabelo)' : '1px solid var(--border)',
-        borderRadius: '8px',
-        padding: '14px 16px',
-        marginBottom: '8px',
-        opacity: item.pending ? 0.75 : 1,
-      }}
+      className={cn(
+        "glass rounded-xl p-3.5 mb-2 transition-all duration-200",
+        item.pending ? "border-[var(--c-cabelo)] opacity-75" : "border-border"
+      )}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', marginBottom: '6px' }}>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: '14px', fontWeight: 500, color: 'var(--text)' }}>
-            {item.title}
-          </div>
-          <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px', lineHeight: 1.4 }}>
-            {item.brand}
-          </div>
+      <div className="flex justify-between items-start gap-4 mb-2">
+        <div className="flex-1 min-w-0">
+          <div className="text-[14px] font-medium text-foreground">{item.title}</div>
+          <div className="text-[12px] text-muted-foreground mt-0.5 leading-snug">{item.brand}</div>
         </div>
-        <div style={{ textAlign: 'right', flexShrink: 0 }}>
-          <div style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text)', whiteSpace: 'nowrap' }}>
-            {item.price}
-          </div>
-          <div style={{ fontSize: '10px', color: 'var(--text-secondary)', textAlign: 'right', marginTop: '2px' }}>
-            {item.priceSub}
-          </div>
+        <div className="text-right shrink-0">
+          <div className="text-[16px] font-medium text-foreground whitespace-nowrap">{item.price}</div>
+          <div className="text-[10px] text-muted-foreground mt-0.5">{item.priceSub}</div>
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+      <div className="flex gap-1.5 flex-wrap">
         {item.links.map((link, i) => (
           <a
             key={i}
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '5px',
-              fontSize: '11px',
-              fontFamily: '"JetBrains Mono", monospace',
-              padding: '4px 10px',
-              borderRadius: '6px',
-              textDecoration: 'none',
-              border: '1px solid var(--border)',
-              color: 'var(--text-secondary)',
-              background: 'var(--bg)',
-              transition: 'all 0.15s ease',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'var(--text)';
-              e.currentTarget.style.color = 'var(--text)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'var(--border)';
-              e.currentTarget.style.color = 'var(--text-secondary)';
-            }}
+            className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-md no-underline border border-border text-muted-foreground bg-[var(--surface-2)] transition-colors hover:border-foreground hover:text-foreground"
           >
             <ArrowUpRight size={10} />
             {link.label}
           </a>
         ))}
         {item.note && (
-          <span style={{ fontSize: '11px', color: item.pending ? 'var(--c-cabelo)' : 'var(--text-secondary)', fontFamily: '"JetBrains Mono", monospace' }}>
+          <span className={cn(
+            "text-[11px] font-mono flex items-center ml-1",
+            item.pending ? "text-[var(--c-cabelo)]" : "text-muted-foreground"
+          )}>
             {item.note}
           </span>
         )}
@@ -81,139 +52,63 @@ function ShoppingCard({ item }: { item: typeof skinProducts[0] }) {
 }
 
 export function ShoppingPanel({ isVisible }: ShoppingPanelProps) {
-  const style: React.CSSProperties = {
-    display: isVisible ? 'block' : 'none',
-    animation: isVisible ? 'fadeIn 0.2s ease' : 'none',
-  };
-
   const skinTotal = 'R$ 175–230';
   const hairTotal = 'R$ 110–160';
   const grandTotal = 'R$ 325–450';
 
+  if (!isVisible) return null;
+
   return (
-    <div style={style}>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h2
-          style={{
-            fontFamily: '"Playfair Display", serif',
-            fontSize: '2rem',
-            fontWeight: 500,
-            color: 'var(--text)',
-            letterSpacing: '-0.02em',
-            margin: 0,
-            lineHeight: 1.2,
-          }}
-        >
+    <div className="animate-in fade-in duration-300 pb-20">
+      <div className="mb-6">
+        <h2 className="font-display text-4xl font-semibold text-foreground tracking-tight leading-none m-0">
           Compras
         </h2>
-        <p
-          style={{
-            fontSize: '13px',
-            color: 'var(--text-secondary)',
-            marginTop: '4px',
-            letterSpacing: '0.04em',
-          }}
-        >
+        <p className="font-sans text-[13px] text-muted-foreground mt-1.5 tracking-wide">
           Produtos com links diretos · preços verificados mai/2026
         </p>
       </div>
 
-      <div style={infoBoxStyle}>
+      <div className="info-box mt-0 mb-6">
         Links priorizando o menor preço encontrado — Mercado Livre quando mais barato, Amazon como alternativa. Confira antes de comprar, preços mudam.
       </div>
 
       {/* Pele */}
-      <p style={sectionTitleStyle}>Pele</p>
+      <p className="section-title">Pele</p>
       {skinProducts.map((item, i) => <ShoppingCard key={i} item={item} />)}
 
-      <div
-        style={{
-          background: 'var(--surface)',
-          border: '1px solid var(--border)',
-          borderRadius: '8px',
-          padding: '14px 16px',
-          marginTop: '1.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Total pele (compra inicial)</div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '18px', fontWeight: 500, color: 'var(--text)' }}>{skinTotal}</div>
-          <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '2px' }}>sem ácido azelaico ainda</div>
+      <div className="glass-strong border border-border rounded-xl p-4 mt-4 flex justify-between items-center">
+        <div className="text-[12px] text-muted-foreground">Total pele (compra inicial)</div>
+        <div className="text-right">
+          <div className="text-[18px] font-medium text-foreground">{skinTotal}</div>
+          <div className="text-[10px] text-muted-foreground mt-0.5">sem ácido azelaico ainda</div>
         </div>
       </div>
 
       {/* Cabelo */}
-      <p style={sectionTitleStyle}>Cabelo — ondas 2A-2B</p>
+      <p className="section-title">Cabelo — ondas 2A-2B</p>
       {hairProducts.map((item, i) => <ShoppingCard key={i} item={item} />)}
 
-      <div
-        style={{
-          background: 'var(--surface)',
-          border: '1px solid var(--border)',
-          borderRadius: '8px',
-          padding: '14px 16px',
-          marginTop: '8px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Total cabelo (compra inicial)</div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '18px', fontWeight: 500, color: 'var(--text)' }}>{hairTotal}</div>
-          <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '2px' }}>Widi Care + Low Poo</div>
+      <div className="glass-strong border border-border rounded-xl p-4 mt-2 flex justify-between items-center">
+        <div className="text-[12px] text-muted-foreground">Total cabelo (compra inicial)</div>
+        <div className="text-right">
+          <div className="text-[18px] font-medium text-foreground">{hairTotal}</div>
+          <div className="text-[10px] text-muted-foreground mt-0.5">Widi Care + Low Poo</div>
         </div>
       </div>
 
       {/* Total geral */}
-      <div
-        style={{
-          background: 'var(--surface)',
-          border: '1px solid var(--accent)',
-          borderRadius: '8px',
-          padding: '14px 16px',
-          marginTop: '8px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Total geral — mês 1</div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '20px', fontWeight: 500, color: 'var(--accent)' }}>{grandTotal}</div>
-          <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '2px' }}>pele + cabelo + corpo · sem azelaico</div>
+      <div className="glass-strong border border-[var(--accent)] rounded-xl p-4 mt-2 flex justify-between items-center">
+        <div className="text-[12px] text-muted-foreground">Total geral — mês 1</div>
+        <div className="text-right">
+          <div className="text-[20px] font-medium text-[var(--accent)]">{grandTotal}</div>
+          <div className="text-[10px] text-muted-foreground mt-0.5">pele + cabelo + corpo · sem azelaico</div>
         </div>
       </div>
 
-      <div style={infoBoxStyle}>
+      <div className="info-box">
         Com R$700 de bolsa e ~R$114 de ônibus, o mês 1 vai consumir quase toda a bolsa. Mas é o único mês assim — do mês 2 em diante são só reposições (~R$117/mês). Os R$2.390 poupados cobrem o investimento inicial sem problema.
       </div>
     </div>
   );
 }
-
-const sectionTitleStyle: React.CSSProperties = {
-  fontSize: '11px',
-  fontWeight: 500,
-  color: 'var(--text-secondary)',
-  letterSpacing: '0.15em',
-  textTransform: 'uppercase',
-  margin: '1.75rem 0 0.75rem',
-  paddingBottom: '0.5rem',
-  borderBottom: '1px solid var(--border)',
-};
-
-const infoBoxStyle: React.CSSProperties = {
-  background: 'var(--surface)',
-  border: '1px solid var(--border)',
-  borderLeft: '3px solid var(--accent)',
-  borderRadius: '8px',
-  padding: '12px 16px',
-  marginTop: '1rem',
-  fontSize: '12px',
-  color: 'var(--text-secondary)',
-  lineHeight: 1.6,
-};
