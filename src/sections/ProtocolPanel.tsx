@@ -1,6 +1,8 @@
 import { protocols } from '@/data/protocols';
 import { TimelineBlock } from './TimelineBlock';
 import { useCheckin } from '@/hooks/useCheckin';
+import { BodyMap } from './BodyMap';
+import { useCallback } from 'react';
 
 interface ProtocolPanelProps {
   isVisible: boolean;
@@ -9,6 +11,14 @@ interface ProtocolPanelProps {
 export function ProtocolPanel({ isVisible }: ProtocolPanelProps) {
   const { getStatus, toggle } = useCheckin();
 
+  const handleRegionClick = useCallback((targetId: string) => {
+    const el = document.getElementById(targetId);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }, []);
+
   const style: React.CSSProperties = {
     display: isVisible ? 'block' : 'none',
     animation: isVisible ? 'fadeIn 0.2s ease' : 'none',
@@ -16,50 +26,28 @@ export function ProtocolPanel({ isVisible }: ProtocolPanelProps) {
 
   return (
     <div style={style}>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h2
-          style={{
-            fontFamily: '"Playfair Display", serif',
-            fontSize: '2rem',
-            fontWeight: 500,
-            color: 'var(--text)',
-            letterSpacing: '-0.02em',
-            margin: 0,
-            lineHeight: 1.2,
-          }}
-        >
-          Protocolos
+      <div className="mb-8">
+        <h2 className="font-display text-4xl font-semibold text-foreground tracking-tight leading-none m-0">
+          Protocolos & Body
         </h2>
-        <p
-          style={{
-            fontSize: '13px',
-            color: 'var(--text-secondary)',
-            marginTop: '4px',
-            letterSpacing: '0.04em',
-          }}
-        >
-          Pele · Corpo · Estrias · Queratose Pilar · Hobbies · Cabelo · Treino · Nutrição · Café
+        <p className="font-sans text-[13px] text-muted-foreground mt-1.5 tracking-wide">
+          O corpo como interface de sistema. Clique numa região para acessar o protocolo.
         </p>
+      </div>
+
+      <div className="mb-12">
+        <BodyMap onRegionClick={handleRegionClick} />
       </div>
 
       {protocols.map((section) => (
         <div key={section.id}>
           <p
             id={section.id}
-            style={{
-              fontSize: '11px',
-              fontWeight: 500,
-              color: 'var(--text-secondary)',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              margin: '2rem 0 0.75rem',
-              paddingBottom: '0.5rem',
-              borderBottom: '1px solid var(--border)',
-            }}
+            className="font-mono text-[11px] font-medium text-muted-foreground tracking-[0.15em] uppercase mt-12 mb-3 pb-2 border-b border-border scroll-mt-24"
           >
             {section.title}
           </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <div className="flex flex-col gap-0.5">
             {section.blocks.map((block, idx) => (
               <TimelineBlock
                 key={idx}
